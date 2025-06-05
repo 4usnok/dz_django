@@ -2,12 +2,12 @@ from django.db import models
 
 
 class Category(models.Model):
-    name_category = models.CharField(
+    name = models.CharField(
         max_length=50,
         verbose_name="Наименование категории",
         help_text="Введите наименование категории",
     )
-    info_category = models.CharField(
+    description = models.CharField(
         max_length=200,
         verbose_name="Описание категории",
         help_text="Введите описание категории",
@@ -16,30 +16,30 @@ class Category(models.Model):
     class Meta:
         verbose_name = "Категория"
         verbose_name_plural = "Категории"
-        ordering = ["name_category"]
+        ordering = ["name"]
 
     def __str__(self):
-        return self.name_category
+        return self.name
 
 class Product(models.Model):
-    name_product = models.CharField(
+    name = models.CharField(
         max_length=50,
         verbose_name="Наименование продукта",
         help_text="Введите наименование продукта",
     )
-    info_product = models.CharField(
+    description = models.CharField(
         max_length=200,
         verbose_name="Описание продукта",
         help_text="Введите описание продукта",
     )
-    img_product = models.ImageField(
+    img = models.ImageField(
         upload_to="product/img",
         blank=True,
         null=True,
         verbose_name="Изображение",
         help_text="Загрузите изображение продукта",
     )
-    category_product = models.ForeignKey(
+    category = models.ForeignKey(
         Category,
         on_delete=models.SET_NULL,
         verbose_name="Категория продукта",
@@ -48,7 +48,7 @@ class Product(models.Model):
         blank=True,
         related_name="products"
     )
-    purchase_price = models.IntegerField(
+    price = models.IntegerField(
         verbose_name="Цена за покупку", help_text="Укажите цену за покупку"
     )
     created_at = models.DateField(
@@ -63,12 +63,12 @@ class Product(models.Model):
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
         ordering = [
-            "name_product",
-            "category_product",
-            "purchase_price",
+            "name",
+            "category",
+            "price",
             "created_at",
             "updated_at",
         ]
 
     def __str__(self):
-        return self.name_product
+        return self.name

@@ -1,0 +1,57 @@
+[
+{
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+        "name": "Сфинксы",
+        "description": "Сфинксы общительны, озорны, ориентированы на людей и любят внимание",
+        "img": "",
+        "category": 6,
+        "price": 5699,
+        "created_at": "2023-10-15",
+        "updated_at": "2025-02-03"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 7,
+    "fields": {
+        "name": "Лабрадоры",
+        "description": "Крупная и сильная собака с крепким скелетом и мощными мышцами",
+        "img": "",
+        "category": 5,
+        "price": 5699,
+        "created_at": "2023-10-15",
+        "updated_at": "2025-02-03"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 8,
+    "fields": {
+        "name": "Чихуахуа",
+        "description": "Собака-компаньон. Считается самой маленькой собакой в мире и носит имя мексиканского штата Чиуауа",
+        "img": "",
+        "category": 5,
+        "price": 7299,
+        "created_at": "2024-03-15",
+        "updated_at": "2025-04-03"
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 5,
+    "fields": {
+        "name": "Собаки",
+        "description": "Как говорят про них: Лучший друг человека."
+    }
+},
+{
+    "model": "catalog.category",
+    "pk": 6,
+    "fields": {
+        "name": "Кошки",
+        "description": "Отличный друг и великолепный охотник на мышей."
+    }
+}
+]

@@ -7,10 +7,11 @@ class Category(models.Model):
         verbose_name="Наименование категории",
         help_text="Введите наименование категории",
     )
-    description = models.CharField(
-        max_length=200,
+    description = models.TextField(
         verbose_name="Описание категории",
         help_text="Введите описание категории",
+        blank=True,
+        null=True
     )
 
     class Meta:
@@ -27,17 +28,18 @@ class Product(models.Model):
         verbose_name="Наименование продукта",
         help_text="Введите наименование продукта",
     )
-    description = models.CharField(
-        max_length=200,
+    description = models.TextField(
         verbose_name="Описание продукта",
         help_text="Введите описание продукта",
+        blank=True,
+        null=True
     )
     img = models.ImageField(
         upload_to="product/img",
         blank=True,
         null=True,
         verbose_name="Изображение",
-        help_text="Загрузите изображение продукта",
+        help_text="Загрузите изображение продукта"
     )
     category = models.ForeignKey(
         Category,

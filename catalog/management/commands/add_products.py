@@ -7,6 +7,7 @@ class Command(BaseCommand):
     help = "Add products to the db"
 
     def handle(self, *args, **options):
+        """Создание продуктов и категорий в админку"""
         # 1. Создаем основную категорию
         category, created = Category.objects.get_or_create(
             name="Собаки", # -> Найденный или созданный объект (category)

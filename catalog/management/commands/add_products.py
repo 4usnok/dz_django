@@ -9,9 +9,9 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         """Создание продуктов и категорий в админку"""
-        # 1. Создаем основную категорию
+        # 1. Создаем категорию
         category, created = Category.objects.get_or_create(
-            name="Собаки",  # -> Найденный или созданный объект (category)
+            name="Кошки",  # -> Найденный или созданный объект (category)
             defaults={
                 "description": "Домашние кошки различных пород"
             },  # -> Булево значение (created), указывающее, был ли объект создан (True) или найден (False)
@@ -25,7 +25,7 @@ class Command(BaseCommand):
 
         # 2. Создаем продукт
         product, created = Product.objects.get_or_create(
-            name="Стаф",  # -> Найденный или созданный объект (product)
+            name="Сфинкс",  # -> Найденный или созданный объект (product)
             defaults={
                 "description": "Очень любвеобильный кот",
                 "img": "",

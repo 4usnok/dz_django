@@ -1,4 +1,5 @@
 from django.contrib import admin
+
 from catalog.models import Category, Product
 
 
@@ -6,6 +7,7 @@ from catalog.models import Category, Product
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
     search_fields = ("name", "description")
+
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):

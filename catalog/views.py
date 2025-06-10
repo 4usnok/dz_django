@@ -19,4 +19,4 @@ def contacts(request):
 def product_info(request):
     products = Product.objects.all()
     context = {"products": products}
-    return render(request,"catalog/product_info.html", context)
+    return render(request,"catalog/prod_info.html", context)

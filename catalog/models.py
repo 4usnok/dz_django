@@ -29,6 +29,11 @@ class Product(models.Model):
         verbose_name="Наименование продукта",
         help_text="Введите наименование продукта",
     )
+    breed = models.CharField(
+        max_length=50,
+        verbose_name="Наименование породы",
+        help_text="Введите наименование породы",
+    )
     description = models.TextField(
         verbose_name="Описание продукта",
         help_text="Введите описание продукта",
@@ -36,7 +41,7 @@ class Product(models.Model):
         null=True,
     )
     img = models.ImageField(
-        upload_to="product/img",
+        upload_to="product/img/",
         blank=True,
         null=True,
         verbose_name="Изображение",

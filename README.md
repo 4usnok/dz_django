@@ -49,3 +49,10 @@ pip install -r requirements.txt
 * в админку при выборе `admin/`
 * Чтобы настроить вход в Django administration, пользователь вводит в консоле команду: `python manage.py createsuperuser`,
 после чего, юзеру предлагают ввести логин, пароль, электронную почту, которые пригодятся для входа в свой личный кабинет администратора
+
+# Основные команды
+* Запуск сервера: `python manage.py runserver`
+* Создание суперюзера(админка): `python manage.py createsuperuser`
+* Создание миграций: `python manage.py makemigrations`
+* Сохранение миграций: `python manage.py migrate`
+* Откат всех миграций: `python manage.py migrate name_migration`, где `name_migration` -> название миграции

@@ -14,13 +14,12 @@ pip install -r requirements.txt
 * Проект или приложение фреймворка Django:
 * В директории-проекте находятся папки с тестами, маршрутизаторами в `urls.py`, контроллерами в `views.py` и тд.
 * Cодержит пакет `management`, в которой есть пакет `commands` с модулем `add_products.py` с фикстурами для `Category` и `Products`
-* Содержит директорию `templates` в которой есть папка `catalog` с двумя html-страницами: `contacts.html` и `home.html`
+* Содержит директорию `catalog`  которая расположена по пути `templates/catalog` с html-страницами: `contacts.html`, `home.html`, `product_list.html`
 * Содержит директорию `migrations` с миграциями(файл: `0001_inital.py`)
-* Содержит директорию `templates` с html-шаблонами, в которой:
-а) есть базовый шаблон `base_for_prod.html` и обычные для других страниц`contacts.html`, `home.html`, `prod_info.html`, `products_detail.html`
-б) Директория `includes` с дочерними шаблонами для:
+* Содержит директорию с html-шаблонами `includes`, которая расположена по пути `templates/catalog/includes`:
 * подвала - `footer.html`
-* шапки и стилей - `head_and_styles.html`
+* шапки - `head.html`
+* стили - `styles.html`
 * всплывающего меню - `inc_menu.html`
 2. Директория `config`
 * Содержит настройки Django проекта в виртуальном окружении `poetry`

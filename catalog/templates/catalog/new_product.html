@@ -14,33 +14,33 @@
         <div class="card-body">
             <div class="mb-3">
                 <label for="validationCustom01" class="form-label">Кличка</label>
-                <input type="text" class="form-control" id="validationCustom01" name="name" required>
+                <input type="text" class="form-control" id="validationCustom01" placeholder="Лепесток, лучик и тд." name="name" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
             </div>
             <div class="mb-3">
               <label for="formGroupExampleInput2" class="form-label">Порода</label>
-              <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Another input placeholder" name="breed">
+              <input type="text" class="form-control" id="formGroupExampleInput2" placeholder="Овчарка, бульдог и тд." name="breed">
             </div>
             <div class="mb-3">
               <label for="exampleFormControlTextarea1" class="form-label" >Описание</label>
-              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>
+              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Самый лучший друг" name="description"></textarea>
             </div>
             <div class="mb-3">
-                <label for="validationCustom01" class="form-label">Категория</label>
-                <input type="text" class="form-control" id="validationCustom02" name="category_id" required>
+                <label for="validationCustom01" class="form-label">Номер категории</label>
+                <input type="text" class="form-control" id="validationCustom02" placeholder="1: собаки" name="category_id" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
             </div>
             <div class="mb-3">
+              <img src="{{ product.img | media_filter }}">
               <label for="formFile" class="form-label">Фото</label>
               <input class="form-control" type="file" id="formFile" name="img">
             </div>
             <label for="exampleFormControlTextarea1" class="form-label" >Цена</label>
             <div class="input-group mb-3">
-                <span class="input-group-text">$</span>
                 <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="price">
                 <span class="input-group-text">.00</span>
             </div>

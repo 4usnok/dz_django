@@ -14,7 +14,12 @@ pip install -r requirements.txt
 * Проект или приложение фреймворка Django:
 * В директории-проекте находятся папки с тестами, маршрутизаторами в `urls.py`, контроллерами в `views.py` и тд.
 * Cодержит пакет `management`, в которой есть пакет `commands` с модулем `add_products.py` с фикстурами для `Category` и `Products`
-* Содержит директорию `catalog`  которая расположена по пути `templates/catalog` с html-страницами: `contacts.html`, `home.html`, `product_list.html`
+* Содержит директорию `catalog`  которая расположена по пути `templates/catalog` с html-страницами:
+* Подробная информация о выбранной карточки - `contacts.html`, 
+* Домашняя страница - `home.html`, 
+* Список карточек - `product_list.html`,
+* Форма оформления заказа - `product_application.html`
+* Форма добавления новой карточки на сайт и в БД - `new_product.html`
 * Содержит директорию `migrations` с миграциями(файл: `0001_inital.py`)
 * Содержит директорию с html-шаблонами `includes`, которая расположена по пути `templates/catalog/includes`:
 * подвала - `footer.html`

@@ -2,6 +2,8 @@ from django.db import models
 
 
 class Category(models.Model):
+
+
     name = models.CharField(
         max_length=50,
         verbose_name="Наименование категории",
@@ -24,6 +26,7 @@ class Category(models.Model):
 
 
 class Product(models.Model):
+
     name = models.CharField(
         max_length=50,
         verbose_name="Наименование продукта",
@@ -59,13 +62,9 @@ class Product(models.Model):
     price = models.IntegerField(
         verbose_name="Цена за покупку", help_text="Укажите цену за покупку"
     )
-    created_at = models.DateField(
-        verbose_name="Дата создания", help_text="Укажите дату создания"
-    )
-    updated_at = models.DateField(
-        verbose_name="Дата последнего изменения",
-        help_text="Укажите дату последнего изменения",
-    )
+    date_now = models.DateTimeField(auto_now_add=True)
+
+    updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = "Продукт"
@@ -74,9 +73,58 @@ class Product(models.Model):
             "name",
             "category",
             "price",
-            "created_at",
+            "date_now",
             "updated_at",
         ]
+
+    def __str__(self):
+        return self.name
+
+class Application(models.Model):
+    name = models.CharField(
+        max_length=50,
+        verbose_name="Имя",
+        help_text="Введите имя",
+    )
+    mail = models.CharField(
+        max_length=50,
+        verbose_name="Электронная почта",
+        help_text="Введите электронную почту",
+        blank=True,  # Необязательное в форме
+        null=True  # Разрешить NULL в БД
+    )
+
+    city = models.CharField(
+        max_length=50,
+        verbose_name="Город",
+        help_text="Введите название города",
+    )
+
+    country = models.CharField(
+        max_length=50,
+        verbose_name="Страна",
+        help_text="Введите название страны",
+    )
+
+    number =  models.CharField(
+        max_length=20,
+        verbose_name="Номер телефона",
+        blank=True,
+        null=True
+    )
+
+    id_product = models.ForeignKey(
+        Product,  # Ссылка на модель Product
+        on_delete=models.CASCADE,  # Удалять заявки при удалении продукта
+        verbose_name="Товар",
+        db_column='id_product'
+    )
+
+
+    class Meta:
+        verbose_name = "Имя"
+        verbose_name_plural = "Имена"
+
 
     def __str__(self):
         return self.name

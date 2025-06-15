@@ -14,6 +14,11 @@
                   <p class="card-text">Категория: {{ product.category }}</p>
                   <p class="card-text">Стоимость: {{ product.price }} рублей</p>
                   <div class="d-flex justify-content-between align-items-center">
+                          <a class="btn btn-primary" href="{%url 'catalog:home' %}" role="button"
+                             style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; "
+                          >вернуться на главную</a> <small class="text-body-secondary">{{ product.updated_at }}</small>
+                      </div>
+                  <div class="d-flex justify-content-between align-items-center">
                      <div class="btn-group">
                   </div>
                </div>

@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="refresh" content="5; url={% url 'catalog:home' %}">
+</head>
+<body>
+    <h1>Спасибо!</h1>
+    <h3>Вы вернетесь на главную страницу через 5 секунд...</h3>
+    <script>setTimeout(() => window.location.href = "{% url 'catalog:home' %}", 5000)</script>
+</body>
+</html>

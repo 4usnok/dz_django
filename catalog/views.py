@@ -1,10 +1,7 @@
 from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404
-from django.utils import timezone
-from django.db import models
 
 from catalog.models import Product, Category
-from .forms import ProductForm
 from .models import Application  # Импортируем модель
 
 
@@ -32,7 +29,8 @@ def blank(request):
             number=request.POST.get('number'),
             id_product_id=request.POST.get('id_product')  # Сохраняем ID продукта
         )
-        return HttpResponse("Спасибо за заявку!")
+        return render(request, 'catalog/thank_you.html')
+
     return render(request, "catalog/product_application.html", context)
 
 def add_product(request):
@@ -48,5 +46,6 @@ def add_product(request):
             price=request.POST.get('price'),
             category_id=request.POST.get('category_id')  # Сохраняем ID продукта
         )
-        return HttpResponse("Новый питомец добавлен в каталог!")
+        return render(request, 'catalog/thank_you.html')
+
     return render(request, "catalog/new_product.html", context)

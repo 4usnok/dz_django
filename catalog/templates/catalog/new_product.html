@@ -7,7 +7,7 @@
     <link href="../../static/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<form method="post" action="">
+<form method="post" action="" enctype="multipart/form-data">
     {% csrf_token %}
     <div class="card card-text position-absolute top-50 start-50 translate-middle" style="width: 20rem;">
     <div class="position-relative">
@@ -28,16 +28,16 @@
               <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Самый лучший друг" name="description"></textarea>
             </div>
             <div class="mb-3">
-                <label for="validationCustom01" class="form-label">Номер категории</label>
-                <input type="text" class="form-control" id="validationCustom02" placeholder="1: собаки" name="category_id" required>
-                <div class="valid-feedback">
-                    Looks good!
-                </div>
+                <label for="category" class="form-label">Категория</label>
+                <select class="form-control" id="category" name="category_id" required>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
             </div>
             <div class="mb-3">
-              <img src="{{ product.img | media_filter }}">
               <label for="formFile" class="form-label">Фото</label>
-              <input class="form-control" type="file" id="formFile" name="img">
+              <input class="form-control" type="file" id="formFile" name="img" required>
             </div>
             <label for="exampleFormControlTextarea1" class="form-label" >Цена</label>
             <div class="input-group mb-3">

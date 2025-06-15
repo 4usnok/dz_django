@@ -12,7 +12,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ("id", "price", "category")
+    list_display = ("id", "price", "name", "category")
     list_filter = ("category",)
 
 @admin.register(Application)

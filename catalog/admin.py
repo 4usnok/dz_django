@@ -18,5 +18,5 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(Application)
 class ApplicationAdmin(admin.ModelAdmin):
     form = ApplicationForm  # Используем нашу форму
-    list_display = ("id", "name", "city", "country")
+    list_display = ("id", "name", "city", "country", "id")
     search_fields = ("name", "city", "country")

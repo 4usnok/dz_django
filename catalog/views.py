@@ -17,8 +17,8 @@ class Blank(View):
     def get(self, request):
         """Получаем данные"""
         products = Product.objects.all()  # Получаем все продукты для выпадающего списка
-        context = {'products': products} # Передаем продукты в шаблон
-        return render(request, "catalog/product_application.html", context)
+        context_blank = {'products': products} # Передаем продукты в шаблон
+        return render(request, "catalog/product_application.html", context_blank)
 
     def post(self, request):
         """Отправляем данные"""
@@ -36,8 +36,8 @@ class AddProduct(View):
     def get(self, request):
         """Получаем данные"""
         categories = Category.objects.all()  # Получаем все категории
-        context = {'categories': categories} # Передаем продукты в шаблон
-        return render(request, "catalog/new_product.html", context)
+        context_add_product = {'categories': categories} # Передаем продукты в шаблон
+        return render(request, "catalog/new_product.html", context_add_product)
 
     def post(self, request):
         """Отправляем данные"""

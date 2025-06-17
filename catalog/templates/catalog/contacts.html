@@ -6,17 +6,17 @@
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
          <div class="col">
             <div class="card shadow-sm">
-               <img src="{{ product.img | media_filter }}">
+               <img src="{{ object.img | media_filter }}">
                <div class="card-body">
-                  <p class="card-text">Кличка: {{ product.name }}</p>
-                  <p class="card-text">Порода: {{ product.breed }}</p>
-                  <p class="card-text">Описание: {{ product.description|truncatechars:100}}</p>
-                  <p class="card-text">Категория: {{ product.category }}</p>
-                  <p class="card-text">Стоимость: {{ product.price }} рублей</p>
+                  <p class="card-text">Кличка: {{ object.name }}</p>
+                  <p class="card-text">Порода: {{ object.breed }}</p>
+                  <p class="card-text">Описание: {{ object.description|truncatechars:100}}</p>
+                  <p class="card-text">Категория: {{ object.category }}</p>
+                  <p class="card-text">Стоимость: {{ object.price }} рублей</p>
                   <div class="d-flex justify-content-between align-items-center">
                           <a class="btn btn-primary" href="{%url 'catalog:home' %}" role="button"
                              style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; "
-                          >вернуться на главную</a> <small class="text-body-secondary">{{ product.updated_at }}</small>
+                          >вернуться на главную</a> <small class="text-body-secondary">{{ object.updated_at }}</small>
                       </div>
                   <div class="d-flex justify-content-between align-items-center">
                      <div class="btn-group">

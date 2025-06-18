@@ -1,6 +1,6 @@
 from django.views import View
-from django.shortcuts import render, get_object_or_404
-from django.views.generic import ListView, DetailView, TemplateView, FormView
+from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 
 from catalog.models import Product, Category
 from .models import Application  # Импортируем модель

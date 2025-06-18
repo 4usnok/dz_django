@@ -3,7 +3,7 @@
 <html lang="en" data-bs-theme="auto">
 
 <head>
-{% include './includes/head.html' %}
+{% include '../includes/head.html' %}
 </head>
 <body> <svg xmlns="http://www.w3.org/2000/svg" class="d-none">
         <symbol id="check2" viewBox="0 0 16 16">
@@ -48,7 +48,7 @@
         </ul>
     </div>
     <header data-bs-theme="dark">
-        {% include './includes/inc_menu.html' %}
+        {% include '../includes/inc_menu.html' %}
     </header>
     <main>
         <section class="py-5 text-center container">
@@ -56,19 +56,21 @@
                 <div class="col-lg-6 col-md-8 mx-auto">
                     <h1 class="fw-light">Дай лапу!</h1>
                     <p class="lead text-body-secondary">Питомник в котором живут ваши друзья!</p>
-                    <div class="col-lg-6 col-md-8 mx-auto">
-                        <p> <a href="{%url 'catalog:blank' %}" class="btn btn-primary my-2">Оформить заказ</a>
-                            <a href="{%url 'blog:home' %}" class="btn btn-primary my-2">Наш блог</a>
-                        </p>
-                    </div>
+                    <p>
+                        <a href="{%url 'blog:home' %}" class="btn btn-primary my-2">Посмотреть все посты</a>
+                        <a href="{%url 'blog:update_post' %}" class="btn btn-primary my-2">Редактировать</a>
+                        <a href="{%url 'blog:delete_post' %}" class="btn btn-primary my-2">Удалить</a>
+                    </p>
                 </div>
             </div>
         </section>
+
         {% block content %}
         {% endblock %}
+
     </main>
     <footer class="text-body-secondary py-5">
-        {% include './includes/footer.html' %}
+        {% include '../includes/footer.html' %}
     </footer>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>

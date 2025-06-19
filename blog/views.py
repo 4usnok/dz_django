@@ -5,12 +5,12 @@ from blog.models import BlogPost
 
 class BlogListView(ListView):
     model = BlogPost
-    template_name = "blog/crud/view_blog.html"
+    template_name = "blog/base_view.html"
     context_object_name = "posts"
 
 class InfoDetailView(DetailView):
     model = BlogPost
-    template_name = "blog/post_info.html"
+    template_name = "blog/crud/post_detail.html"
     context_object_name = "info"
 
 class BlogCreateView(CreateView):

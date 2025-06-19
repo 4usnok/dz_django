@@ -13,6 +13,12 @@ class InfoDetailView(DetailView):
     template_name = "blog/crud/post_detail.html"
     context_object_name = "info"
 
+    def get_object(self, queryset=None):
+        self.object = super().get_object(queryset)
+        self.object.number_of_views += 1
+        self.object.save()
+        return self.object
+
 class BlogCreateView(CreateView):
     model = BlogPost
     template_name = "blog/crud/create_post.html"
@@ -25,7 +31,11 @@ class BlogUpdateView(UpdateView):
     model = BlogPost
     template_name = "blog/crud/update_post.html"
     fields = ("title", "content", "preview", "publication_sign", "number_of_views")
-    success_url = reverse_lazy("blog:home")
+    def get_success_url(self):
+        return reverse(
+            "blog:info_post", # Имя из path() в urls.py
+            kwargs={"pk": self.object.pk}  # Параметры для подстановки
+        )
 
 class BlogDeleteView(DeleteView):
     model = BlogPost

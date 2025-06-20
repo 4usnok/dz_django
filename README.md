@@ -11,23 +11,25 @@ pip install -r requirements.txt
 ```
 # Содержание проекта
 1. Приложение `catalog`
-* Проект или приложение фреймворка Django:
 * В директории-проекте находятся папки с тестами, маршрутизаторами в `urls.py`, контроллерами в `views.py` и тд.
-* Cодержит пакет `management`, в которой есть пакет `commands` с модулем `add_products.py` с фикстурами для `Category` и `Products`
-* Содержит директорию `catalog`  которая расположена по пути `templates/catalog` с html-страницами:
-* Подробная информация о выбранной карточки - `contacts.html`, 
-* Домашняя страница - `home.html`, 
-* Список карточек - `product_list.html`,
-* Форма оформления заказа - `product_application.html`
-* Форма добавления новой карточки на сайт и в БД - `new_product.html`
+* Cодержит пакет `management`, в которой есть пакет `commands` с модулем `add_products.py` в которой расположены: фикстуры для `Category` и `Products`
 * Содержит директорию `migrations` с миграциями
-* Содержит директорию с html-шаблонами `includes`, которая расположена по пути `templates/catalog/includes`:
+* Содержит директорию `templates` для шаблонов
+* В `templates` расположена директория `catalog` с html-страницами:
+* Подробная информация о выбранной карточки - `contacts.html`, 
+* `home.html` -> Домашняя страница,
+* `product_list.html` -> Список карточек,
+* `product_application.html` -> Форма оформления заказа,
+* `new_product.html` -> Форма добавления новой карточки на сайт и в БД,
+* В `templates` находится директория с html-шаблонами `includes`, которая расположена по пути `templates/catalog/includes`:
 * `footer.html` -> для подвала,
 * `head.html` -> для шапки,
 * `inc_menu.html` -> для всплывающего меню,
 * `light_button.html` -> для кнопки, которая меняет цвет фона,
 * `styles.html` -> для стилей;
+* Директория `templatetags` расположен модуль `my_tags.py` для тэгов
 2. Приложение `blog`
+* В директории-проекте находятся папки с тестами, маршрутизаторами в `urls.py`, контроллерами в `views.py` и тд.
 * Содержит директорию `migrations` с миграциями
 * Содержит директорию `templates` с html-страницами:
 * В директории `blog` находятся директории `crud` и `includes`:

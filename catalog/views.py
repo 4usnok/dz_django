@@ -1,26 +1,27 @@
-from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.views import View
+from django.shortcuts import render
+from django.views.generic import ListView, DetailView
 
 from catalog.models import Product, Category
 from .models import Application  # Импортируем модель
 
 
-def home(request):
-    products = Product.objects.all()
-    context = {"products": products}
-    return render(request, "catalog/product_list.html", context)
+class Home(ListView):
+    model = Product
 
-def contact(request, pk):
-    product = get_object_or_404(Product, pk=pk)
-    context = {"product": product}
-    return render(request, "catalog/contacts.html", context)
+class Contact(DetailView):
+    model = Product
+    template_name = "catalog/contacts.html"
 
+class Blank(View):
+    def get(self, request):
+        """Получаем данные"""
+        products = Product.objects.all()  # Получаем все продукты для выпадающего списка
+        context_blank = {'products': products} # Передаем продукты в шаблон
+        return render(request, "catalog/product_application.html", context_blank)
 
-def blank(request):
-    products = Product.objects.all()  # Получаем все продукты для выпадающего списка
-    context = {'products': products} # Передаем продукты в шаблон
-    if request.method == "POST":
-        # Создаем заявку
+    def post(self, request):
+        """Отправляем данные"""
         Application.objects.create(
             name=request.POST.get('name'),
             mail=request.POST.get('mail'),
@@ -31,21 +32,21 @@ def blank(request):
         )
         return render(request, 'catalog/thank_you.html')
 
-    return render(request, "catalog/product_application.html", context)
+class AddProduct(View):
+    def get(self, request):
+        """Получаем данные"""
+        categories = Category.objects.all()  # Получаем все категории
+        context_add_product = {'categories': categories} # Передаем продукты в шаблон
+        return render(request, "catalog/new_product.html", context_add_product)
 
-def add_product(request):
-    categories = Category.objects.all()  # Получаем все категории
-    context = {'categories': categories} # Передаем продукты в шаблон
-    if request.method == "POST":
-        # Создаем заявку
+    def post(self, request):
+        """Отправляем данные"""
         Product.objects.create(
-            name=request.POST.get('name'),
-            breed=request.POST.get('breed'),
-            description=request.POST.get('description'),
-            img=request.FILES['img'],
-            price=request.POST.get('price'),
-            category_id=request.POST.get('category_id')  # Сохраняем ID продукта
+        name=request.POST.get('name'),
+        breed=request.POST.get('breed'),
+        description=request.POST.get('description'),
+        img=request.FILES['img'],
+        price=request.POST.get('price'),
+        category_id=request.POST.get('category_id')  # Сохраняем ID продукта
         )
         return render(request, 'catalog/thank_you.html')
-
-    return render(request, "catalog/new_product.html", context)

@@ -11,7 +11,7 @@
 {% include '../includes/light_button.html' %}
 
 <div class="card card-text position-absolute top-50 start-50 translate-middle" style="width: 40rem;">
-    <h2>Редактирование поста</h2>
+    <h2>Редактирование анкеты питомца</h2>
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.as_p }}

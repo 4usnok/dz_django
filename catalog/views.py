@@ -26,7 +26,7 @@ class ProductUpdateView(UpdateView):
     def get_success_url(self):
         """ Перенаправление после редактирования на просмотр этой статьи """
         return reverse(
-            "catalog:contact", # Имя из path() в urls.py
+            "catalog:info_product", # Имя из path() в urls.py
             kwargs={"pk": self.object.pk}  # Параметры для подстановки
         )
 

@@ -10,4 +10,4 @@ class ApplicationForm(forms.ModelForm):
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
-        fields = ['name', 'img']  # поля, которые можно редактировать
+        fields = ["name", "breed", "description", "img", "category", "price"]  # поля, которые можно редактировать

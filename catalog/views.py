@@ -1,17 +1,43 @@
+from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 from catalog.models import Product, Category
+from .forms import ProductForm
 from .models import Application  # Импортируем модель
 
 
 class Home(ListView):
     model = Product
 
-class Contact(DetailView):
+class ProductCreateView(CreateView):
+    form_class = ProductForm
     model = Product
-    template_name = "catalog/contacts.html"
+    template_name = "catalog/crud/create_product.html"
+    success_url = reverse_lazy("catalog:home")
+
+class ProductUpdateView(UpdateView):
+    form_class = ProductForm
+    model = Product
+    template_name = "catalog/crud/update_product.html"
+    success_url = reverse_lazy("catalog:home")
+
+    def get_success_url(self):
+        """ Перенаправление после редактирования на просмотр этой статьи """
+        return reverse(
+            "catalog:contact", # Имя из path() в urls.py
+            kwargs={"pk": self.object.pk}  # Параметры для подстановки
+        )
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = "catalog/crud/delete_product.html"
+    success_url = reverse_lazy("catalog:home")
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = "catalog/crud/detail_product.html"
 
 class Blank(View):
     def get(self, request):

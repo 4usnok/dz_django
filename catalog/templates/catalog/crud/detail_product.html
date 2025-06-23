@@ -20,7 +20,7 @@
         <img src="{{ object.img | media_filter }}"
         class="img-fluid mb-5" style="max-height: 400px; width: auto; margin: 0 auto; display: block;">
         <a class="card-text" style="font-weight: 500; word-wrap: break-word;" href="{%url 'catalog:info_product' object.pk %}">{{ object.name }}</a>
-        <p style="font-weight: 100;">{{ info.content}}</p>
+        <p style="font-weight: 100;">{{ object.description}}</p>
         <p>
             <a href="{%url 'catalog:update_post' object.pk %}" class="btn btn-warning my-2">Редактировать</a>
             <a href="{%url 'catalog:delete_post' object.pk %}" class="btn btn-danger my-2">Удалить</a>

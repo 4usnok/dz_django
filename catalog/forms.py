@@ -27,3 +27,9 @@ class ProductForm(forms.ModelForm):
                     self.add_error("description", "Некорректное слово в описании.")
                 if name.lower() in word.strip().lower():
                     self.add_error("name", "Некорректное слово в названии")
+
+    def clean_price(self):
+        price = self.cleaned_data.get("price")
+        if price < 0:
+            raise ValidationError("Стоимость не должна быть отрицательной.")
+

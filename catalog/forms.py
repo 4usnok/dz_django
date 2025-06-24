@@ -30,31 +30,32 @@ class ProductForm(forms.ModelForm):
 
         self.fields['name'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': self._meta.model._meta.get_field('name').help_text
+            'placeholder': Product._meta.get_field('name').help_text
         })
 
         self.fields['breed'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': self._meta.model._meta.get_field('breed').help_text
+            'placeholder': Product._meta.get_field('breed').help_text
         })
 
         self.fields['description'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': self._meta.model._meta.get_field('description').help_text
+            'placeholder': Product._meta.get_field('description').help_text
         })
 
         self.fields['img'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': self._meta.model._meta.get_field('img').help_text
+            'placeholder': Product._meta.get_field('img').help_text
         })
 
         self.fields['category'].widget.attrs.update({
             'class': 'form-control',
+            'placeholder': Product._meta.get_field('category').help_text
         })
 
         self.fields['price'].widget.attrs.update({
             'class': 'form-control',
-            'placeholder': self._meta.model._meta.get_field('price').help_text
+            'placeholder': Product._meta.get_field('price').help_text
         })
 
     def clean(self):

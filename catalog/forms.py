@@ -59,6 +59,7 @@ class ProductForm(forms.ModelForm):
         })
 
     def clean(self):
+        """ Валидация для name и description """
         file_path = "./stop_words.txt"
         cleaned_data = super().clean()
         name = cleaned_data.get("name")
@@ -71,6 +72,7 @@ class ProductForm(forms.ModelForm):
                     self.add_error("name", "Некорректное слово в названии")
 
     def clean_price(self):
+        """ Кастомная валидация для поля price """
         price = self.cleaned_data.get('price')
         if price <= 0:
             raise ValidationError("No prices")

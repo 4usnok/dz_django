@@ -73,8 +73,22 @@ class ProductForm(forms.ModelForm):
 
     def clean_price(self):
         """ Кастомная валидация для поля price """
-        price = self.cleaned_data.get('price')
+        price = self.cleaned_data.get('price') # получение содержимого поля price
         if price <= 0:
             raise ValidationError("No prices")
         return price
 
+    def clean_img(self):
+        """ Кастомная валидация формата и веса файла для поля img """
+        img = self.cleaned_data.get('img') # получение содержимого поля img
+        allowed_extensions = {'.jpg', '.png'} # кортеж с названиями расширений
+        max_size = 5 * (1024 * 1024) # максимальный размер
+        file_name = img.name # получим название загружаемого файла
+        file_extension = f".{file_name.split('.')[-1].lower()}" # получим название расширения загружаемого файла
+        # Валидация расширения файла
+        if file_extension not in allowed_extensions:
+            raise ValidationError("Неверный формат.")
+        # Валидация веса файла
+        if img.size > max_size:
+            raise ValidationError(f"Файл слишком большой! Идеальный вес: {max_size // (1024 * 1024)} МБ.")
+        return img

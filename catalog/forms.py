@@ -1,5 +1,7 @@
 from django import forms
 from django.core.exceptions import ValidationError
+from django.db import models
+
 
 from catalog.models import Application, Product
 
@@ -10,9 +12,50 @@ class ApplicationForm(forms.ModelForm):
         fields = ['name', 'mail', 'city', 'country', 'number', 'id_product']  # Поля для формы
 
 class ProductForm(forms.ModelForm):
+
     class Meta:
         model = Product
         fields = ["name", "breed", "description", "img", "category", "price"]  # поля, которые можно редактировать
+        help_texts = { # Отключим отображение help_text снизу
+            'name': None,
+            'breed': None,
+            'description': None,
+            'img': None,
+            'category': None,
+            'price': None,
+        }
+
+    def __init__(self, *args, **kwargs):
+        super(ProductForm, self).__init__(*args, **kwargs)
+
+        self.fields['name'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': self._meta.model._meta.get_field('name').help_text
+        })
+
+        self.fields['breed'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': self._meta.model._meta.get_field('breed').help_text
+        })
+
+        self.fields['description'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': self._meta.model._meta.get_field('description').help_text
+        })
+
+        self.fields['img'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': self._meta.model._meta.get_field('img').help_text
+        })
+
+        self.fields['category'].widget.attrs.update({
+            'class': 'form-control',
+        })
+
+        self.fields['price'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': self._meta.model._meta.get_field('price').help_text
+        })
 
     def clean(self):
         file_path = "./stop_words.txt"

@@ -1,7 +1,5 @@
-from pathlib import Path
-
 from django import forms
-from prompt_toolkit.validation import ValidationError
+from django.core.exceptions import ValidationError
 
 from catalog.models import Application, Product
 
@@ -29,7 +27,8 @@ class ProductForm(forms.ModelForm):
                     self.add_error("name", "Некорректное слово в названии")
 
     def clean_price(self):
-        price = self.cleaned_data.get("price")
-        if price < 0:
-            raise ValidationError("Стоимость не должна быть отрицательной.")
+        price = self.cleaned_data.get('price')
+        if price <= 0:
+            raise ValidationError("No prices")
+        return price
 

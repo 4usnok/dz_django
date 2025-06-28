@@ -89,6 +89,6 @@ class ProductForm(forms.ModelForm):
         if file_extension not in allowed_extensions:
             raise ValidationError("Неверный формат.")
         # Валидация веса файла
-        if img.size > max_size:
+        if img.size > max_size: # в img.size -> получаем вес файла
             raise ValidationError(f"Файл слишком большой! Идеальный вес: {max_size // (1024 * 1024)} МБ.")
         return img

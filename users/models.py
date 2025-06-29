@@ -4,7 +4,10 @@ from django.db import models
 
 class User(AbstractUser):
     username = None
-    email = models.EmailField(unique=True, verbose_name="Email")
+    email = models.EmailField(
+        unique=True,
+        verbose_name="Email",
+    )
 
     img_avatar = models.ImageField(
         verbose_name="Img",

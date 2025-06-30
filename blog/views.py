@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
@@ -13,7 +14,8 @@ class BlogListView(ListView):
         queryset = super().get_queryset()
         return queryset.filter(publication_sign=True)
 
-class InfoDetailView(DetailView):
+class InfoDetailView(LoginRequiredMixin, DetailView):
+    login_url  = "/users/login/"
     model = BlogPost
     template_name = "blog/crud/post_detail.html"
     context_object_name = "info"

@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.shortcuts import render
@@ -35,7 +36,8 @@ class ProductDeleteView(DeleteView):
     template_name = "catalog/crud/delete_product.html"
     success_url = reverse_lazy("catalog:home")
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
+    login_url  = "/users/login/"
     model = Product
     template_name = "catalog/crud/detail_product.html"
 

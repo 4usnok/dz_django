@@ -1,7 +1,7 @@
 import os
 
 from django.urls import reverse_lazy
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from django.core.mail import send_mail
 
 from users.forms import UserRegisterForm
@@ -28,3 +28,9 @@ class UserCreateView(CreateView):
             os.getenv("SECRET_MAIL"),  # Отправитель письма (берем нашу почту)
             [user_email] # Получатель письма
         )
+
+class UserUpdateView(UpdateView):
+    form_class = UserRegisterForm
+    model = User
+    template_name = "users/crud/update_post.html"
+    success_url = reverse_lazy("catalog:home")

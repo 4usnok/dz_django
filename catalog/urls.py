@@ -13,6 +13,4 @@ urlpatterns = [
 
     path("blank/", Blank.as_view(), name="blank"),
     path("add_product/", AddProduct.as_view(), name="add_product"),
-
-
 ]

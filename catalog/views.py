@@ -12,7 +12,8 @@ from .models import Application  # Импортируем модель
 class Home(ListView):
     model = Product
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
+    login_url = "/users/login/"
     form_class = ProductForm
     model = Product
     template_name = "catalog/crud/create_product.html"
@@ -41,7 +42,8 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = "catalog/crud/detail_product.html"
 
-class Blank(View):
+class Blank(LoginRequiredMixin, View):
+    login_url = "/users/login/"
     def get(self, request):
         """Получаем данные"""
         products = Product.objects.all()  # Получаем все продукты для выпадающего списка

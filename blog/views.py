@@ -27,7 +27,8 @@ class InfoDetailView(LoginRequiredMixin, DetailView):
         self.object.save()
         return self.object
 
-class BlogCreateView(CreateView):
+class BlogCreateView(LoginRequiredMixin, CreateView):
+    login_url = "/users/login/"
     model = BlogPost
     template_name = "blog/crud/create_post.html"
     fields = ("title", "content", "preview", "publication_sign", "number_of_views")

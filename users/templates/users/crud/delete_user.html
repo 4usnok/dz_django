@@ -15,7 +15,7 @@
     <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <button type="submit" class="btn btn-primary">Подтвердить</button>
-    <a href="{%url 'catalog:home' %}" class="btn btn-primary my-2">Выйти</a>
+    <a href="{%url 'catalog:home' %}" class="btn btn-secondary my-2">Выйти</a>
 </form>
 </div>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>

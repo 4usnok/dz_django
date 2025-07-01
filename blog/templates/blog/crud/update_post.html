@@ -16,7 +16,7 @@
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Сохранить</button>
-        <a href="{% url 'blog:home' %}" class="btn btn-secondary">Отмена</a>
+        <a href="{% url 'blog:home' %}" class="btn btn-secondary my-2">Отмена</a>
     </form>
 </div>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>

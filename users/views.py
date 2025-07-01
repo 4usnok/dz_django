@@ -4,7 +4,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, UpdateView, DeleteView
 from django.core.mail import send_mail
 
-from users.forms import UserRegisterForm
+from users.forms import UserRegisterForm, UserUpdateForm
 from users.models import User
 
 
@@ -30,7 +30,7 @@ class UserCreateView(CreateView):
         )
 
 class UserUpdateView(UpdateView):
-    form_class = UserRegisterForm
+    form_class = UserUpdateForm
     model = User
     template_name = "users/crud/update_user.html"
     success_url = reverse_lazy("catalog:home")

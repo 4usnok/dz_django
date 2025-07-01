@@ -19,7 +19,8 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     template_name = "catalog/crud/create_product.html"
     success_url = reverse_lazy("catalog:home")
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
+    login_url = "/users/login/"
     form_class = ProductForm
     model = Product
     template_name = "catalog/crud/update_product.html"
@@ -32,7 +33,8 @@ class ProductUpdateView(UpdateView):
             kwargs={"pk": self.object.pk}  # Параметры для подстановки
         )
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
+    login_url = "/users/login/"
     model = Product
     template_name = "catalog/crud/delete_product.html"
     success_url = reverse_lazy("catalog:home")

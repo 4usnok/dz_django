@@ -71,6 +71,10 @@ class Product(models.Model):
             "date_now",
             "updated_at",
         ]
+        permissions = [
+            ("can_unpublish_product", "Can unpublish product"),
+            ("can_delete_product", "Can delete product"),
+        ]
 
     def __str__(self):
         return self.name

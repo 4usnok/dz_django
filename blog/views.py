@@ -15,7 +15,6 @@ class BlogListView(ListView):
         return queryset.filter(publication_sign=True)
 
 class InfoDetailView(LoginRequiredMixin, DetailView):
-    login_url  = "/users/login/"
     model = BlogPost
     template_name = "blog/crud/post_detail.html"
     context_object_name = "info"
@@ -28,7 +27,6 @@ class InfoDetailView(LoginRequiredMixin, DetailView):
         return self.object
 
 class BlogCreateView(LoginRequiredMixin, CreateView):
-    login_url = "/users/login/"
     model = BlogPost
     template_name = "blog/crud/create_post.html"
     fields = ("title", "content", "preview", "publication_sign", "number_of_views")

@@ -13,14 +13,12 @@ class Home(ListView):
     model = Product
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
-    login_url = "/users/login/"
     form_class = ProductForm
     model = Product
     template_name = "catalog/crud/create_product.html"
     success_url = reverse_lazy("catalog:home")
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
-    login_url = "/users/login/"
     form_class = ProductForm
     model = Product
     template_name = "catalog/crud/update_product.html"
@@ -34,18 +32,15 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
         )
 
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
-    login_url = "/users/login/"
     model = Product
     template_name = "catalog/crud/delete_product.html"
     success_url = reverse_lazy("catalog:home")
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
-    login_url  = "/users/login/"
     model = Product
     template_name = "catalog/crud/detail_product.html"
 
 class Blank(LoginRequiredMixin, View):
-    login_url = "/users/login/"
     def get(self, request):
         """Получаем данные"""
         products = Product.objects.all()  # Получаем все продукты для выпадающего списка

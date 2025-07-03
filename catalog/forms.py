@@ -1,7 +1,5 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from django.db import models
-
 
 from catalog.models import Application, Product
 
@@ -15,10 +13,9 @@ class ProductForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ["name", "breed", "description", "img", "category", "price"]  # поля, которые можно редактировать
+        fields = ["name", "description", "img", "category", "price"]  # поля, которые можно редактировать
         help_texts = { # Отключим отображение help_text снизу
             'name': None,
-            'breed': None,
             'description': None,
             'img': None,
             'category': None,
@@ -31,11 +28,6 @@ class ProductForm(forms.ModelForm):
         self.fields['name'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': Product._meta.get_field('name').help_text
-        })
-
-        self.fields['breed'].widget.attrs.update({
-            'class': 'form-control',
-            'placeholder': Product._meta.get_field('breed').help_text
         })
 
         self.fields['description'].widget.attrs.update({

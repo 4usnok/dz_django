@@ -32,11 +32,6 @@ class Product(models.Model):
         verbose_name="Наименование продукта",
         help_text="Введите наименование",
     )
-    breed = models.CharField(
-        max_length=50,
-        verbose_name="Наименование породы",
-        help_text="Введите наименование породы",
-    )
     description = models.TextField(
         verbose_name="Описание продукта",
         help_text="Введите описание продукта",

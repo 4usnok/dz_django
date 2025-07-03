@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.views import View
 from django.shortcuts import render
@@ -11,13 +12,13 @@ from .models import Application  # Импортируем модель
 class Home(ListView):
     model = Product
 
-class ProductCreateView(CreateView):
+class ProductCreateView(LoginRequiredMixin, CreateView):
     form_class = ProductForm
     model = Product
     template_name = "catalog/crud/create_product.html"
     success_url = reverse_lazy("catalog:home")
 
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ProductForm
     model = Product
     template_name = "catalog/crud/update_product.html"
@@ -30,16 +31,16 @@ class ProductUpdateView(UpdateView):
             kwargs={"pk": self.object.pk}  # Параметры для подстановки
         )
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = "catalog/crud/delete_product.html"
     success_url = reverse_lazy("catalog:home")
 
-class ProductDetailView(DetailView):
+class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = "catalog/crud/detail_product.html"
 
-class Blank(View):
+class Blank(LoginRequiredMixin, View):
     def get(self, request):
         """Получаем данные"""
         products = Product.objects.all()  # Получаем все продукты для выпадающего списка

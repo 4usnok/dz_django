@@ -4,17 +4,18 @@
 
 
 <head>
-{% include '../includes/head.html' %}
+{% include './includes/head.html' %}
 </head>
 
 <body>
-{% include '../includes/light_button.html' %}
+{% include './includes/light_button.html' %}
 
 <div class="card card-text position-absolute top-50 start-50 translate-middle" style="width: 40rem;">
-    <h2>Вы точно хотите удалить ?</h2>
+    <h2>Регистрация</h2>
     <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
-    <button type="submit" class="btn btn-primary">Подтвердить</button>
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
     <a href="{%url 'catalog:home' %}" class="btn btn-secondary my-2">Выйти</a>
 </form>
 </div>

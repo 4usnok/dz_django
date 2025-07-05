@@ -61,6 +61,9 @@ class Product(models.Model):
 
     updated_at = models.DateTimeField(auto_now=True)
 
+    unpublish = models.BooleanField(default=False)
+
+
     class Meta:
         verbose_name = "Продукт"
         verbose_name_plural = "Продукты"
@@ -70,6 +73,7 @@ class Product(models.Model):
             "price",
             "date_now",
             "updated_at",
+            "unpublish",
         ]
         permissions = [
             ("can_unpublish_product", "Can unpublish product"),

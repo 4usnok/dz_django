@@ -11,12 +11,20 @@
 {% include '../includes/light_button.html' %}
 
 <div class="card card-text position-absolute top-50 start-50 translate-middle" style="width: 40rem;">
-    <h2>Редактирование анкеты питомца</h2>
-    <form method="post" enctype="multipart/form-data">
+    <form method="post">
+        <h2>Редактирование анкеты питомца</h2>
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+    <a href="{% url 'catalog:home' %}" class="btn btn-secondary my-2">Отмена</a>
+    </form>
+    <form action="{% url 'catalog:product_unpublish' product.id %}" method="post"
+          onsubmit="return confirm('Вы точно хотите снять с публикации?')"
+          class="d-flex justify-content-end mt-3">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Сохранить</button>
-        <a href="{% url 'catalog:home' %}" class="btn btn-secondary my-2">Отмена</a>
+        <button type="submit" class="btn btn-warning">
+            Снять публикацию
+        </button>
     </form>
 </div>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>

@@ -65,8 +65,13 @@ class Product(models.Model):
 
     unpublish = models.BooleanField(default=False)
 
-    owner = models.ForeignKey(User, verbose_name="Владелец", help_text="Введите имя владельца", blank=True, null=True, on_delete="Удалить владельца")
-
+    owner = models.ForeignKey(
+        User,
+        verbose_name="Владелец",
+        help_text="Выберите владельца",
+        null=True,
+        on_delete=models.CASCADE,
+    )
 
     class Meta:
         verbose_name = "Продукт"

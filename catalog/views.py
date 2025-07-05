@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy, reverse
@@ -28,6 +29,11 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     template_name = "catalog/crud/create_product.html"
     success_url = reverse_lazy("catalog:home")
+
+    def form_valid(self, form):
+        """Кастомный метод для сохранения пользователя в поле owner"""
+        form.instance.owner = self.request.user  # 1. Привязываем пользователя
+        return super().form_valid(form)  # 2. Сохраняем форму стандартным способом
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ProductForm

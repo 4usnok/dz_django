@@ -30,6 +30,7 @@ class User(AbstractUser):
         null=True,
         )
 
+
     USERNAME_FIELD = "email" # В качестве уникального поля, используется email
     REQUIRED_FIELDS = [] # При создании пользователя через команду createsuperuser, никаких доп.полей не используется
 

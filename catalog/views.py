@@ -31,7 +31,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     success_url = reverse_lazy("catalog:home")
 
     def form_valid(self, form):
-        """Кастомный метод для сохранения пользователя в поле owner"""
+        """Кастомный метод для привязки пользователя к полю owner"""
         form.instance.owner = self.request.user  # 1. Привязываем пользователя
         return super().form_valid(form)  # 2. Сохраняем форму стандартным способом
 

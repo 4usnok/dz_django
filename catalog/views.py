@@ -1,4 +1,3 @@
-from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy, reverse
@@ -8,7 +7,7 @@ from django.http import HttpResponseForbidden
 
 from catalog.models import Product, Category
 from .forms import ProductForm, ProductModeratorForm
-from .models import Application  # Импортируем модель
+from .models import Application
 
 
 class UnpublishProductView(LoginRequiredMixin, View):
@@ -53,13 +52,11 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "catalog/crud/delete_product.html"
     success_url = reverse_lazy("catalog:home")
 
-    def get_form_class(self):
+    def dispatch(self, request, *args, **kwargs):
         """Метод для прав доступа на удаление"""
         user = self.request.user
-        if user == self.object.category:
-            return ProductForm
         if user.has_perm("catalog.can_delete_product"):
-            return ProductModeratorForm
+            return super().dispatch(request, *args, **kwargs)
         raise PermissionDenied
 
 class ProductDetailView(LoginRequiredMixin, DetailView):

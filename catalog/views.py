@@ -6,7 +6,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.http import HttpResponseForbidden
 
 from catalog.models import Product, Category
-from .forms import ProductForm, ProductModeratorForm
+from .forms import ProductForm
 from .models import Application
 
 

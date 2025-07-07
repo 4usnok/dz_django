@@ -1,13 +1,24 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy, reverse
-from django.views import View
-from django.shortcuts import render
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
+from django.http import HttpResponseForbidden
 
 from catalog.models import Product, Category
 from .forms import ProductForm
-from .models import Application  # Импортируем модель
+from .models import Application
 
+
+class UnpublishProductView(LoginRequiredMixin, View):
+    def post(self, request, product_id):
+        product = get_object_or_404(Product, id=product_id)
+        if not request.user.has_perm("catalog.can_unpublish_product"):
+            return HttpResponseForbidden("У вас нет необходимых прав снятия с публикации.")
+        product.unpublish = True
+        product.save()
+
+        return redirect("catalog:info_product", pk=product_id)
 
 class Home(ListView):
     model = Product
@@ -17,6 +28,11 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
     model = Product
     template_name = "catalog/crud/create_product.html"
     success_url = reverse_lazy("catalog:home")
+
+    def form_valid(self, form):
+        """Кастомный метод для привязки пользователя к полю owner"""
+        form.instance.owner = self.request.user  # 1. Привязываем пользователя
+        return super().form_valid(form)  # 2. Сохраняем форму стандартным способом
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ProductForm
@@ -35,6 +51,13 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = "catalog/crud/delete_product.html"
     success_url = reverse_lazy("catalog:home")
+
+    def dispatch(self, request, *args, **kwargs):
+        """Метод для прав доступа на удаление"""
+        user = self.request.user
+        if user.has_perm("catalog.can_delete_product"):
+            return super().dispatch(request, *args, **kwargs)
+        raise PermissionDenied
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product

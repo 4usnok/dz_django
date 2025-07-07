@@ -50,6 +50,13 @@ class ProductForm(forms.ModelForm):
             'placeholder': Product._meta.get_field('price').help_text
         })
 
+class ProductModeratorForm(forms.ModelForm):
+
+    class Meta:
+        model = Product
+        fields = ["unpublish", ]  # поля, которые можно редактировать
+
+
     def clean(self):
         """ Валидация для name и description """
         file_path = "./stop_words.txt"

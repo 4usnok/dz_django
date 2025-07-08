@@ -16,11 +16,9 @@ from django.core.cache import cache
 
 def my_view(request):
     data = cache.get("my_key")
-
     if not data:
         data = "some expensive computation"
         cache.set("my_key", data, 60*15)
-
     return HttpResponse(data)
 
 class UnpublishProductView(LoginRequiredMixin, View):

@@ -23,7 +23,6 @@ def my_view(request):
 
     return HttpResponse(data)
 
-@method_decorator(cache_page(60 * 15), name='dispatch')
 class UnpublishProductView(LoginRequiredMixin, View):
     def post(self, request, product_id):
         product = get_object_or_404(Product, id=product_id)
@@ -34,11 +33,9 @@ class UnpublishProductView(LoginRequiredMixin, View):
 
         return redirect("catalog:info_product", pk=product_id)
 
-@method_decorator(cache_page(60 * 15), name='dispatch')
 class Home(ListView):
     model = Product
 
-@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductCreateView(LoginRequiredMixin, CreateView):
     form_class = ProductForm
     model = Product
@@ -50,7 +47,6 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         form.instance.owner = self.request.user  # 1. Привязываем пользователя
         return super().form_valid(form)  # 2. Сохраняем форму стандартным способом
 
-@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
     form_class = ProductForm
     model = Product
@@ -64,7 +60,6 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
             kwargs={"pk": self.object.pk}  # Параметры для подстановки
         )
 
-@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductDeleteView(LoginRequiredMixin, DeleteView):
     model = Product
     template_name = "catalog/crud/delete_product.html"
@@ -82,7 +77,6 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = "catalog/crud/detail_product.html"
 
-@method_decorator(cache_page(60 * 15), name='dispatch')
 class Blank(LoginRequiredMixin, View):
     def get(self, request):
         """Получаем данные"""
@@ -102,7 +96,6 @@ class Blank(LoginRequiredMixin, View):
         )
         return render(request, 'catalog/thank_you.html')
 
-@method_decorator(cache_page(60 * 15), name='dispatch')
 class AddProduct(View):
     def get(self, request):
         """Получаем данные"""

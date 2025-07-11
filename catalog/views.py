@@ -2,13 +2,26 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.urls import reverse_lazy, reverse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, HttpResponse
 
 from catalog.models import Product, Category
 from .forms import ProductForm
 from .models import Application
 
+from django.core.cache import cache
+
+from .services import products_by_category
+
+
+def my_view(request):
+    data = cache.get("my_key")
+    if not data:
+        data = "some expensive computation"
+        cache.set("my_key", data, 60*15)
+    return HttpResponse(data)
 
 class UnpublishProductView(LoginRequiredMixin, View):
     def post(self, request, product_id):
@@ -22,6 +35,18 @@ class UnpublishProductView(LoginRequiredMixin, View):
 
 class Home(ListView):
     model = Product
+
+class ProdFromCat(ListView):
+    model = Product
+    template_name = "catalog/prod_from_category.html"
+    def get_queryset(self):
+        return products_by_category(self.kwargs['category_id'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Добавляем объект категории в контекст
+        context['category'] = Category.objects.get(id=self.kwargs['category_id'])
+        return context
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     form_class = ProductForm
@@ -59,6 +84,7 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
             return super().dispatch(request, *args, **kwargs)
         raise PermissionDenied
 
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = "catalog/crud/detail_product.html"

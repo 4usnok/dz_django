@@ -13,6 +13,8 @@ from .models import Application
 
 from django.core.cache import cache
 
+from .services import products_by_category
+
 
 def my_view(request):
     data = cache.get("my_key")
@@ -33,6 +35,18 @@ class UnpublishProductView(LoginRequiredMixin, View):
 
 class Home(ListView):
     model = Product
+
+class ProdFromCat(ListView):
+    model = Product
+    template_name = "catalog/prod_from_category.html"
+    def get_queryset(self):
+        return products_by_category(self.kwargs['category_id'])
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Добавляем объект категории в контекст
+        context['category'] = Category.objects.get(id=self.kwargs['category_id'])
+        return context
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
     form_class = ProductForm

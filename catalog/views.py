@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View
 from django.http import HttpResponseForbidden, HttpResponse
+from library.readme import category
 
 from catalog.models import Product, Category
 from .forms import ProductForm
@@ -35,6 +36,11 @@ class UnpublishProductView(LoginRequiredMixin, View):
 
 class Home(ListView):
     model = Product
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['categories'] = Category.objects.filter(name__isnull=False).distinct()
+        return context
 
 class ProdFromCat(ListView):
     model = Product

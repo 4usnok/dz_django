@@ -33,8 +33,9 @@
                                     Выберите категорию
                                   </button>
                                   <ul class="dropdown-menu dropdown-menu-dark">
-                                      {% for obj in object_list %}
-                                        <li><a class="dropdown-item" href="{%url 'catalog:prod_from_cat' obj.category_id %}">{{ obj.category }}</a></li>
+                                      {% for cat in categories %}
+                                        <li><a href="{% url 'catalog:prod_by_cat' cat.id %}">
+                                            <button type="button" class="btn">{{ cat.name }}</button></a></li>
                                       {% endfor %}
                                   </ul>
                                 </li>

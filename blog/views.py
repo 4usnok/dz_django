@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy, reverse
 from django.views.generic import CreateView, UpdateView, DeleteView, ListView, DetailView
 
@@ -13,7 +14,7 @@ class BlogListView(ListView):
         queryset = super().get_queryset()
         return queryset.filter(publication_sign=True)
 
-class InfoDetailView(DetailView):
+class InfoDetailView(LoginRequiredMixin, DetailView):
     model = BlogPost
     template_name = "blog/crud/post_detail.html"
     context_object_name = "info"
@@ -25,7 +26,7 @@ class InfoDetailView(DetailView):
         self.object.save()
         return self.object
 
-class BlogCreateView(CreateView):
+class BlogCreateView(LoginRequiredMixin, CreateView):
     model = BlogPost
     template_name = "blog/crud/create_post.html"
     fields = ("title", "content", "preview", "publication_sign", "number_of_views")

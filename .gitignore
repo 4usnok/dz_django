@@ -171,4 +171,3 @@ cython_debug/
 .env
 media/
 .db.sqlite3
-/stop_words.txt

@@ -11,13 +11,12 @@
 {% include '../includes/light_button.html' %}
 
 <div class="card card-text position-absolute top-50 start-50 translate-middle" style="width: 40rem;">
-    <h2>Редактирование поста</h2>
+    <h2>Вы точно хотите удалить анкету?</h2>
     <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Сохранить</button>
-        <a href="{% url 'blog:home' %}" class="btn btn-secondary my-2">Отмена</a>
-    </form>
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Подтвердить</button>
+    <a href="{%url 'catalog:home' %}" class="btn btn-secondary my-2">Выйти</a>
+</form>
 </div>
 <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
